@@ -1,0 +1,18 @@
+extends Node2D
+var sounds=[]
+
+func _ready():
+    randomize()
+    sounds.append(preload("res://sounds/music.wav"))
+    sounds.append(preload("res://sounds/music2.wav"))
+    sounds.append(preload("res://sounds/music3.wav"))
+    $AudioStreamPlayer.stream=sounds.front()
+    $AudioStreamPlayer.play()
+
+func sounds_random(s:Array) -> void:
+    s.shuffle()
+    $AudioStreamPlayer.stream=sounds.front()
+    $AudioStreamPlayer.play()
+
+func _on_AudioStreamPlayer_finished():
+    sounds_random(sounds)
